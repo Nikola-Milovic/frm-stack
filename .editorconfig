@@ -1,0 +1,29 @@
+# EditorConfig helps maintain consistent coding styles between different editors & IDEs
+# More info at: https://EditorConfig.org
+
+root = true
+
+# Global settings for all files
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Markdown files: allow trailing whitespace if needed
+[*.md]
+trim_trailing_whitespace = false
+
+# Files specific to web development including TypeScript, JavaScript, HTML, JSON, CSS, etc.
+[*.{js,jsx,ts,tsx,html,css,scss,json,yml,yaml}]
+indent_size = 2
+
+# SQL files: set sane defaults for SQL development
+[*.sql]
+indent_size = 2
+
+[justfile]
+indent_size = 2
+indent_style = tab

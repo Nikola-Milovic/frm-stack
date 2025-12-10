@@ -1,0 +1,12 @@
+.direnv
+.env
+.turbo
+node_modules
+*.DS_Store
+.pnpm-store
+.DS_Store
+dist/
+.data
+tsconfig.tsbuildinfo
+storybook-static
+

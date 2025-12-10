@@ -1,0 +1,25 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    "group:allNonMajor",
+    ":automergeMinor",
+    ":automergeBranch"
+  ],
+  "baseBranchPatterns": [
+    "staging"
+  ],
+  "docker-compose": {
+    "enabled": false
+  },
+  "packageRules": [
+    {
+      "matchCategories": [
+        "docker"
+      ],
+      "digest": {
+        "enabled": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "name": "@yourcompany/backend-core",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "imports": {
+    "#*": "./src/*.ts"
+  },
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc",
+    "lint:check": "biome lint ./src",
+    "lint": "biome lint --fix ./src",
+    "format:check": "biome format ./src",
+    "format": "biome format --write ./src",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "better-auth": "catalog:",
+    "hono": "catalog:",
+    "neverthrow": "catalog:",
+    "pg": "catalog:",
+    "pino": "catalog:",
+    "superjson": "catalog:",
+    "unique-username-generator": "^1.5.1",
+    "uuid": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "@yourcompany/configs": "workspace:*",
+    "@testcontainers/postgresql": "11.9.0",
+    "@types/node": "catalog:",
+    "@types/pg": "catalog:",
+    "pino-pretty": "catalog:",
+    "testcontainers": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "@yourcompany/configs/tsconfig.react.node",
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": "."
+  },
+  "include": ["storybook/**/*.ts", "storybook/**/*.d.ts"]
+}
+

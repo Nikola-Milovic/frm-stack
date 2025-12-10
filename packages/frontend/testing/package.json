@@ -1,0 +1,45 @@
+{
+  "name": "@yourcompany/testing",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -b --noEmit",
+    "lint": "biome lint --fix ./storybook",
+    "lint:check": "biome lint ./storybook",
+    "format": "biome format --write ./storybook",
+    "format:check": "biome format ./storybook"
+  },
+  "exports": {
+    "./storybook/main": "./storybook/main.ts",
+    "./storybook/preview": "./storybook/preview.ts"
+  },
+  "files": [
+    "storybook"
+  ],
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "@storybook/addon-a11y": "catalog:",
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/addon-links": "catalog:",
+    "@storybook/addon-themes": "catalog:",
+    "@storybook/react": "catalog:",
+    "@storybook/react-vite": "catalog:",
+    "@tailwindcss/vite": "catalog:",
+    "@yourcompany/configs": "workspace:*",
+    "storybook": "catalog:",
+    "vite": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "@storybook/addon-a11y": "catalog:",
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/addon-links": "catalog:",
+    "@storybook/addon-themes": "catalog:",
+    "@storybook/react": "catalog:",
+    "@storybook/react-vite": "catalog:",
+    "@tailwindcss/vite": "catalog:",
+    "storybook": "catalog:",
+    "vite": "catalog:"
+  }
+}

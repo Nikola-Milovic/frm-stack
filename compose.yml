@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:18-alpine
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER} -d ${PG_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+    environment:
+      - POSTGRES_PASSWORD=${PG_PASS?Variable not set}
+      - POSTGRES_USER=${PG_USER?Variable not set}
+      - POSTGRES_DB=${PG_DB?Variable not set}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      # - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres-data:

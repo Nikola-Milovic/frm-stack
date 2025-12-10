@@ -1,0 +1,28 @@
+{
+  "name": "@yourcompany/hello",
+  "version": "0.0.0",
+  "type": "module",
+  "imports": {
+    "#*": "./src/*.ts"
+  },
+  "exports": {
+    "./hello": "./src/hello.ts"
+  },
+  "sideEffects": false,
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -b --noEmit",
+    "typecheck": "tsc -b --noEmit",
+    "lint": "biome lint --fix ./src",
+    "lint:check": "biome lint ./src",
+    "format": "biome format --write ./src",
+    "format:check": "biome format ./src"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "@yourcompany/configs": "workspace:*"
+  }
+}

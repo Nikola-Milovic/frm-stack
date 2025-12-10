@@ -1,0 +1,9 @@
+node_modules/**
+.turbo/**
+dist/**
+build/**
+cdk.out/**
+result
+result/**
+.devbox
+.devbox/**

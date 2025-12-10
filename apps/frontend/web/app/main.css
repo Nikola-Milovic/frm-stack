@@ -1,0 +1,4 @@
+@import "@yourcompany/web/styles";
+
+/* You don't have to import styles from a package, you have styles directly in your application if you don't plan on sharing it between multiple applications */
+@source "../node_modules/@yourcompany/web";

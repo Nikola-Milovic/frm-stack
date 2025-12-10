@@ -1,0 +1,22 @@
+# Exclude other apps
+apps/web
+apps/admin
+
+# Exclude large seed data
+db/seed
+db/migrations/*.down.sql
+
+# Exclude unnecessary directories  
+deployment
+docs
+tools
+
+# Exclude development files
+.git
+*.md
+README.md
+
+# Exclude build artifacts
+**/dist/
+**/node_modules/
+*.log

@@ -1,0 +1,10 @@
+.direnv
+.data
+.env
+!.env.example
+.git
+.gitignore
+.idea
+.vscode
+node_modules
+temp

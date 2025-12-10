@@ -1,0 +1,52 @@
+{
+  "name": "@yourcompany/api",
+  "type": "module",
+  "imports": {
+    "#*": "./src/*.ts"
+  },
+  "exports": {
+    "./*": "./src/*.ts",
+    "./orpc": "./src/routers/index.ts",
+    "./auth": "./src/auth.ts"
+  },
+  "scripts": {
+    "dev": "node --import 'amaro/strip' --no-warnings --env-file=.env --watch src/main.ts | pino-pretty",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node --import 'amaro/strip' --no-warnings src/main.ts",
+    "lint:check": "biome lint ./src",
+    "lint": "biome lint --fix ./src",
+    "format:check": "biome format ./src",
+    "format": "biome format --write ./src",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "coverage": "vitest run --coverage",
+    "update:packages": "npx npm-check-updates -u"
+  },
+  "dependencies": {
+    "@hono/node-server": "catalog:",
+    "@hono/zod-validator": "catalog:",
+    "@orpc/server": "catalog:",
+    "@yourcompany/backend-core": "workspace:*",
+    "@yourcompany/hello": "workspace:*",
+    "better-auth": "catalog:",
+    "hono": "catalog:",
+    "neverthrow": "catalog:",
+    "pg": "catalog:",
+    "pino": "catalog:",
+    "superjson": "catalog:",
+    "uuid": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "@yourcompany/configs": "workspace:*",
+    "@types/node": "catalog:",
+    "testcontainers": "catalog:",
+    "@testcontainers/postgresql": "catalog:",
+    "amaro": "catalog:",
+    "@types/pg": "catalog:",
+    "pino-pretty": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

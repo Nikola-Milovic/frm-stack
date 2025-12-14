@@ -49,6 +49,8 @@ db-schema:
 	@pnpm biome format --fix packages/backend/core/src/schema.ts
 
 setup: dev-clean
+	@pnpm install
+	@./tools/dev_check.sh
 	@{{dc}} up -d
 	@POSTGRES_CONTAINER_NAME=$(docker inspect -f '{{{{.Name}}' $(docker-compose ps -q postgres) | cut -c2-) ./tools/db_isready.sh
 	@just db-migrate

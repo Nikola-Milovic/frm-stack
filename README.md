@@ -40,6 +40,7 @@ Important: there are **no builds** for the main apps during dev (both frontend a
 
 - `apps/backend/api`: Hono server, Better Auth, oRPC router, services (user + todo), Vitest tests
 - `apps/frontend/web`: Vite + React app (home page is the TODO CRUD demo)
+- `apps/frontend/landing`: Astro static landing site (this repo’s “front door”)
 - `packages/backend/core`: shared backend core (DB, config, auth helpers, validation, test helpers, generated schema types)
 - `packages/frontend/web`: shared UI/components library (shadcn components)
 - `packages/shared/*`: shared configs + tiny example package (`hello`)
@@ -95,6 +96,7 @@ Then run the same steps (`pnpm install`, `just setup`, `pnpm dev`).
 
 - `pnpm dev` / `pnpm typecheck` / `pnpm lint:check` / `pnpm format:check` / `pnpm test`
 - `pnpm -C apps/backend/api test`
+- `pnpm -C apps/frontend/landing dev`
 - `just setup` (docker + migrate), `just db-migrate` (schema “push”), `just db-schema`, `just db-psql`
 - Versioned migrations (Atlas, still based on `db/schema.sql`):
   - `just db-migration-new add_todos`

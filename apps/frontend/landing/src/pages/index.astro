@@ -1,0 +1,154 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { GET_STARTED, LINKS, SITE } from "../lib/site";
+
+const mailto = `mailto:${LINKS.email}?subject=${encodeURIComponent("FRM Stack — Hello")}`;
+---
+
+<BaseLayout title={`${SITE.title} — Landing`} description={SITE.description}>
+  <header class="container site-header">
+    <div class="site-header__inner">
+      <a href="/" style="display:flex; align-items:center; gap: 10px;">
+        <img src="/logo.png" alt="FRM Stack" width="28" height="28" />
+        <span style="font-weight: 800; letter-spacing: -0.03em;">FRM Stack</span>
+      </a>
+
+      <nav aria-label="Primary" class="btn-row">
+        <a class="btn ghost" href="#get-started">Get started</a>
+        <a class="btn ghost" href="#contact">Contact</a>
+        <a class="btn" href={LINKS.github} target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="container">
+    <section class="section hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Build fast with a clean, pragmatic stack.</h1>
+
+        <p class="hero-lead">
+          A modern TypeScript monorepo template that gets you to "shipping" quickly: predictable structure, sane tooling, and a backend/frontend split that scales without getting in your way.
+        </p>
+
+        <div class="btn-row hero-cta">
+          <a class="btn primary" href={LINKS.github} target="_blank" rel="noreferrer">View repo</a>
+          <a class="btn" href="#get-started">Quick start</a>
+        </div>
+      </div>
+
+      <div class="card card--terminal hero-terminal">
+        <div class="terminal-bar" aria-hidden="true">
+          <span class="terminal-dot dot-red"></span>
+          <span class="terminal-dot dot-yellow"></span>
+          <span class="terminal-dot dot-green"></span>
+          <span class="terminal-title">repo preview</span>
+        </div>
+        <pre><code>frm-stack/
+  apps/
+    backend/api        # API service
+    frontend/web       # product app
+    frontend/landing   # Astro landing
+  packages/
+    backend/core       # backend libs
+    frontend/web       # web libs
+    shared/config      # shared tooling
+
+# get started with
+> just setup
+> pnpm dev</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Why this template</h2>
+      <p class="lead">A baseline that stays tidy as you add apps, packages, and teams.</p>
+
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Monorepo that stays tidy</h3>
+          <p>Turbo + pnpm workspaces/catalog for consistent versions and fast tasks across apps and packages.</p>
+        </div>
+        <div class="card">
+          <h3>Backend + DB workflow</h3>
+          <p>Postgres-ready, schema-first approach, and a structure that keeps service boundaries clear.</p>
+        </div>
+        <div class="card">
+          <h3>Frontend ready to grow</h3>
+          <p>Composable UI patterns and tooling that keeps DX high while still being maintainable long-term.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="get-started" class="section">
+      <h2>Get started</h2>
+      <p class="lead">Clone the template, install deps, and start the dev servers. Then tweak what you need.</p>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>1. Clone + install</h3>
+          <pre><code>git clone {GET_STARTED.cloneHttps}
+cd frm-stack
+pnpm install</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>2. Setup + run dev</h3>
+          <pre><code># from the repo root
+just setup
+pnpm dev</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What you get</h2>
+      <p class="lead">A clean baseline you can adapt: swap libraries, keep the structure, and move quickly.</p>
+
+      <div class="grid cols-3">
+        <div class="card card--soft">
+          <h3>Clear boundaries</h3>
+          <p>Apps are separate from shared packages, so shared code stays intentional and easy to maintain.</p>
+        </div>
+        <div class="card card--soft">
+          <h3>Fast feedback loops</h3>
+          <p>JIT dev setup and task orchestration keep iteration fast, even as the repo grows.</p>
+        </div>
+        <div class="card card--soft">
+          <h3>Sane defaults</h3>
+          <p>Formatting and linting are centralized; TypeScript and modern tooling are first-class.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section--end">
+      <h2>Contact</h2>
+      <p class="lead">Questions, feedback, or PRs welcome.</p>
+
+      <div class="grid cols-3">
+        <div class="card card--soft">
+          <h3>Email</h3>
+          <p><a href={mailto}>{LINKS.email}</a></p>
+        </div>
+        <div class="card card--soft">
+          <h3>Twitter</h3>
+          <p><a href={LINKS.twitter} target="_blank" rel="noreferrer">{LINKS.twitter}</a></p>
+        </div>
+        <div class="card card--soft">
+          <h3>GitHub</h3>
+          <p><a href={LINKS.github} target="_blank" rel="noreferrer">{LINKS.github}</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container site-footer">
+    <div class="site-footer__inner">
+      <span>© {new Date().getFullYear()} FRM Stack • Built with Astro</span>
+      <span>
+        <a href={LINKS.github} target="_blank" rel="noreferrer">Repo</a>
+        <span aria-hidden="true"> · </span>
+        <a href={mailto}>Email</a>
+      </span>
+    </div>
+  </footer>
+</BaseLayout>

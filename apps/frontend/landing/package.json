@@ -1,0 +1,25 @@
+{
+  "name": "@yourcompany/landing",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "lint": "biome lint --fix --files-ignore-unknown=true ./src",
+    "lint:check": "biome lint --files-ignore-unknown=true ./src",
+    "format": "biome format --write --files-ignore-unknown=true .",
+    "format:check": "biome format --files-ignore-unknown=true ."
+  },
+  "dependencies": {
+    "astro": "^5.16.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@biomejs/biome": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

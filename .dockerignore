@@ -1,12 +1,4 @@
-# Exclude other apps
-apps/web
-apps/admin
-
-# Exclude large seed data
-db/seed
-db/migrations/*.down.sql
-
-# Exclude unnecessary directories  
+# Exclude unnecessary directories
 deployment
 docs
 tools

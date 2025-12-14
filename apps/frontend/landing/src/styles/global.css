@@ -46,6 +46,7 @@
 html,
 body {
   height: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -101,8 +102,14 @@ a:hover {
 }
 
 .container {
-  width: min(var(--max), calc(100% - 48px));
+  width: min(var(--max), calc(100% - 32px));
   margin-inline: auto;
+}
+
+@media (min-width: 860px) {
+  .container {
+    width: min(var(--max), calc(100% - 48px));
+  }
 }
 
 .grid {
@@ -153,10 +160,17 @@ a:hover {
 .card {
   border: 1px solid var(--border);
   border-radius: var(--radius2);
-  padding: 18px;
+  padding: 14px;
   background: color-mix(in oklab, var(--panel2) 70%, transparent);
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+@media (min-width: 860px) {
+  .card {
+    padding: 18px;
+  }
 }
 
 .card h3 {
@@ -224,14 +238,26 @@ pre {
 
 pre {
   margin: 0;
-  padding: 14px;
+  padding: 12px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: color-mix(in oklab, #000 16%, var(--panel2));
   overflow-x: auto;
   box-shadow: 0 1px 0 color-mix(in oklab, var(--border) 60%, transparent) inset;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.55;
+  max-width: 100%;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+@media (min-width: 860px) {
+  pre {
+    padding: 14px;
+    font-size: 13px;
+    white-space: pre;
+    word-break: normal;
+  }
 }
 
 .card--terminal pre {
@@ -285,6 +311,36 @@ pre {
 
 .section {
   padding: 44px 0;
+  position: relative;
+  isolation: isolate;
+  --section-wash: var(--bg2);
+}
+
+.section:nth-of-type(odd) {
+  --section-wash: var(--bg2);
+}
+
+.section:nth-of-type(even) {
+  --section-wash: var(--bg);
+}
+
+/* Full-bleed, soft section wash (no hard seams between sections). */
+.section::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  width: 100dvw;
+  transform: translateX(-50%);
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in oklab, var(--section-wash) 55%, transparent) 12%,
+    color-mix(in oklab, var(--section-wash) 55%, transparent) 88%,
+    transparent 100%
+  );
 }
 
 @media (min-width: 860px) {
@@ -315,6 +371,14 @@ pre {
   display: grid;
   gap: 32px;
   align-items: start;
+}
+
+.section.hero {
+  --section-wash: transparent;
+}
+
+.section.hero::before {
+  content: none;
 }
 
 @media (min-width: 900px) {
@@ -365,16 +429,23 @@ pre {
 }
 
 .hero-terminal {
-  padding: 22px;
+  padding: 14px;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .hero-terminal pre {
-  padding: 16px;
-  min-height: 260px;
+  padding: 12px;
+  min-height: auto;
 }
 
 @media (min-width: 900px) {
+  .hero-terminal {
+    padding: 22px;
+  }
+
   .hero-terminal pre {
+    padding: 16px;
     min-height: 280px;
   }
 }

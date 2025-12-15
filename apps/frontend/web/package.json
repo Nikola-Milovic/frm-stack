@@ -39,7 +39,6 @@
     "zustand": "catalog:"
   },
   "devDependencies": {
-    "@biomejs/biome": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "@yourcompany/testing": "workspace:*",
     "@storybook/addon-a11y": "catalog:",
@@ -53,7 +52,6 @@
     "@vitejs/plugin-react": "catalog:",
     "storybook": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plugin-top-level-await": "catalog:",
     "vite-tsconfig-paths": "catalog:"

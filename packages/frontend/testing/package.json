@@ -18,7 +18,6 @@
     "storybook"
   ],
   "devDependencies": {
-    "@biomejs/biome": "catalog:",
     "@storybook/addon-a11y": "catalog:",
     "@storybook/addon-docs": "catalog:",
     "@storybook/addon-links": "catalog:",
@@ -28,8 +27,7 @@
     "@tailwindcss/vite": "catalog:",
     "@yourcompany/configs": "workspace:*",
     "storybook": "catalog:",
-    "vite": "catalog:",
-    "typescript": "catalog:"
+    "vite": "catalog:"
   },
   "peerDependencies": {
     "@storybook/addon-a11y": "catalog:",

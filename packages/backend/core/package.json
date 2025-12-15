@@ -31,14 +31,11 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@biomejs/biome": "catalog:",
     "@yourcompany/configs": "workspace:*",
-    "@testcontainers/postgresql": "11.9.0",
+    "@testcontainers/postgresql": "catalog:",
     "@types/node": "catalog:",
     "@types/pg": "catalog:",
     "pino-pretty": "catalog:",
-    "testcontainers": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "testcontainers": "catalog:"
   }
 }

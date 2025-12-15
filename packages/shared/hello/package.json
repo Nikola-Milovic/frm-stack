@@ -22,7 +22,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@biomejs/biome": "catalog:",
     "@yourcompany/configs": "workspace:*"
   }
 }

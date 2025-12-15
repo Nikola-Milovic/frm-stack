@@ -51,7 +51,6 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@biomejs/biome": "catalog:",
     "@storybook/addon-a11y": "catalog:",
     "@storybook/addon-docs": "catalog:",
     "@storybook/addon-links": "catalog:",
@@ -63,7 +62,6 @@
     "@types/react-dom": "catalog:",
     "@yourcompany/configs": "workspace:*",
     "@yourcompany/testing": "workspace:*",
-    "storybook": "catalog:",
-    "typescript": "catalog:"
+    "storybook": "catalog:"
   }
 }

@@ -38,15 +38,12 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@biomejs/biome": "catalog:",
     "@yourcompany/configs": "workspace:*",
     "@types/node": "catalog:",
-    "testcontainers": "catalog:",
+    "@types/pg": "catalog:",
     "@testcontainers/postgresql": "catalog:",
     "amaro": "catalog:",
-    "@types/pg": "catalog:",
     "pino-pretty": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "testcontainers": "catalog:"
   }
 }

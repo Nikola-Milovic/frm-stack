@@ -23,7 +23,21 @@ Why oRPC here:
 - Works cleanly with Hono and a services-first layout.
 
 Why not tRPC (for this repo):
-- tRPC is a solid, popular choice; oRPC’s ergonomics and integration fit the “minimal server glue + contract-first” feel I wanted for this template.
+- tRPC is a solid, popular choice; oRPC's ergonomics and integration fit the "minimal server glue + contract-first" feel I wanted for this template.
+
+## Routing: TanStack Router
+
+Why TanStack Router here:
+- **Type-safe, file-based routing** with excellent DX and developer tools.
+- Strong TypeScript integration and thoughtful API design.
+- Part of the broader TanStack ecosystem (see below).
+
+## TanStack libraries: preferred when available
+
+This repo prefers **TanStack libraries** (TanStack Router, TanStack Query, etc.) when they fit the use case. The TanStack team consistently delivers:
+- **Well-thought-out APIs** with excellent TypeScript support
+- **Great developer experience** and tooling
+- **Strong community support** and active maintenance
 
 ## Errors: neverthrow
 

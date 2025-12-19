@@ -1,15 +1,10 @@
-# WIP showcase template (community-built)
+# Modern TypeScript Monorepo Template
 
-This repo is a **demo monorepo template** meant to evolve into a clear, modern reference example.
+This repo is a **demo monorepo template** meant to evolve into a clear, modern reference example, so I am inviting everyone to contribute to it and make it better.
 
 Everything here is **illustrative, not prescriptive** — pick what you like, swap what you don’t (ORM/RPC/auth/testing/etc.).
 
-If you’re reviewing this, I’d love feedback and PRs to help build it up:
-- the monorepo structure (`apps/*` vs `packages/*`)
-- the service/router layering (oRPC + Hono + neverthrow) and **DI-first design**
-- the DB workflow (Atlas + `db/schema.sql` + Kysely + codegen)
-- the testing setup (shared Postgres container pattern — **currently an experiment**)
-- the “no build / JIT” setup and DX tradeoffs (especially HMR for Node/shared packages)
+If you’re reviewing this, I’d love feedback and PRs to help build it up.
 
 Note: This kind of repo structure has served me really well in startups and in personal projects. If you have a bigger team, more enterprisey needs, you might want to consider a more traditional monorepo structure that people are more familiar with. If you have any questions you can reach out via email, twitter, github or wherever you find me.
 
@@ -26,7 +21,7 @@ Important: there are **no builds** for the main apps during dev (both frontend a
 | Category | Choice | Why | Where | Docs |
 |---|---|---|---|---|
 | Monorepo | Turbo + pnpm workspaces/catalog | Fast task orchestration + centralized dependency versions | repo root | `turbo.json` |
-| Frontend | Vite + React 19 + React Router | Fast DX + simple routing | `apps/frontend/web` | (this README) |
+| Frontend | Vite + React 19 + TanStack Router | Fast DX + simple routing | `apps/frontend/web` | (this README) |
 | UI | Tailwind + shadcn/ui | Speed + composable primitives | `packages/frontend/web` | (this README) |
 | API | Hono + oRPC | Lightweight HTTP + end-to-end type-safe RPC | `apps/backend/api` | `docs/ORPC.md` |
 | Auth | Better Auth | Batteries-included auth | `apps/backend/api/src/auth.ts` | `docs/AUTH.md` |

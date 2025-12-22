@@ -61,3 +61,4 @@ catalog:
 
 onlyBuiltDependencies:
   - '@swc/core'
+  - unrs-resolver

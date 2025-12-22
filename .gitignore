@@ -10,3 +10,4 @@ dist/
 tsconfig.tsbuildinfo
 storybook-static
 .astro
+.vscode

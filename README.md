@@ -22,6 +22,7 @@ Important: there are **no builds** for the main apps during dev (both frontend a
 |---|---|---|---|---|
 | Monorepo | Turbo + pnpm workspaces/catalog | Fast task orchestration + centralized dependency versions | repo root | `turbo.json` |
 | Frontend | Vite + React 19 + TanStack Router | Fast DX + simple routing | `apps/frontend/web` | (this README) |
+| Mobile | Expo + React Native | Cross-platform native apps | `apps/frontend/mobile` | `docs/mobile.md` |
 | UI | Tailwind + shadcn/ui | Speed + composable primitives | `packages/frontend/web` | (this README) |
 | API | Hono + oRPC | Lightweight HTTP + end-to-end type-safe RPC | `apps/backend/api` | `docs/ORPC.md` |
 | Auth | Better Auth | Batteries-included auth | `apps/backend/api/src/auth.ts` | `docs/AUTH.md` |
@@ -37,7 +38,8 @@ Important: there are **no builds** for the main apps during dev (both frontend a
 
 - `apps/backend/api`: Hono server, Better Auth, oRPC router, services (user + todo), Vitest tests
 - `apps/frontend/web`: Vite + React app (home page is the TODO CRUD demo)
-- `apps/frontend/landing`: Astro static landing site (this repo’s “front door”)
+- `apps/frontend/landing`: Astro static landing site (this repo's "front door")
+- `apps/frontend/mobile`: Expo React Native mobile app (WIP Better Auth integration)
 - `packages/backend/core`: shared backend core (DB, config, auth helpers, validation, test helpers, generated schema types)
 - `packages/frontend/web`: shared UI/components library (shadcn components)
 - `packages/shared/*`: shared configs + tiny example package (`hello`)
@@ -126,6 +128,7 @@ Then run the same steps (`pnpm install`, `just setup`, `pnpm dev`).
 - `docs/vitest_config.md`
 - `docs/config.md`
 - `docs/logging.md`
+- `docs/mobile.md`
 - `docs/skills.md`
 
 ## Skills (AI Workflows)

@@ -4,7 +4,9 @@
     "just@latest",
     "nodejs@latest",
     "pnpm@latest",
-    "atlas@latest"
+    "atlas@latest",
+    "jq@latest",
+    "gh@latest"
   ],
   "env": {
     "PATH": "$PATH:$PWD/bin"

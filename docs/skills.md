@@ -11,7 +11,7 @@ Check out
 
 Skills are folders containing a `SKILL.md` file with optional resources (scripts, references, assets). AI agents load relevant skills based on context and follow the instructions within.
 
-**Location:** `.skills/`
+**Location:** `.agents/skills/`
 
 ## Available Skills
 
@@ -56,6 +56,10 @@ Create distinctive, production-grade frontend interfaces. Avoids generic "AI slo
 ### `skill-creator`
 
 Guide for creating new skills. Use when extending Claude's capabilities with custom workflows.
+
+### `resolve-pr-comments`
+
+ Address GitHub PR review comments end-to-end, fetch unresolved review threads (via `gh` GraphQL), implement fixes, reply with what changed, and resolve threads using the bundled scripts.
 
 ## Work Tracking
 

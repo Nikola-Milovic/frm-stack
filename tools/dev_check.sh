@@ -28,22 +28,33 @@ else
 fi
 echo ""
 
-# Check for .env.example files without corresponding .env
+# Check for .env.example and .env.*.example files without corresponding .env files
 echo "Checking environment files..."
 missing_env=()
 
-while IFS= read -r -d '' env_example; do
-	dir=$(dirname "$env_example")
-	env_file="$dir/.env"
-	relative_path="${env_example#$ROOT_DIR/}"
+# Function to check if corresponding .env file exists
+check_env_file() {
+	local env_example="$1"
+	local dir=$(dirname "$env_example")
+	local basename=$(basename "$env_example")
+	local relative_path="${env_example#$ROOT_DIR/}"
+
+	# Extract the env file name by removing .example suffix
+	# e.g., .env.example -> .env, .env.development.example -> .env.development
+	local env_file="$dir/${basename%.example}"
 
 	if [ -f "$env_file" ]; then
-		echo -e "  ${GREEN}✓${NC} $relative_path has .env"
+		echo -e "  ${GREEN}✓${NC} $relative_path has ${basename%.example}"
 	else
-		echo -e "  ${YELLOW}!${NC} $relative_path missing .env"
+		echo -e "  ${YELLOW}!${NC} $relative_path missing ${basename%.example}"
 		missing_env+=("$relative_path")
 	fi
-done < <(find "$ROOT_DIR" -name ".env.example" -not -path "*/node_modules/*" -print0)
+}
+
+# Find all .env.example files (base and mode-specific)
+while IFS= read -r -d '' env_example; do
+	check_env_file "$env_example"
+done < <(find "$ROOT_DIR" \( -name ".env.example" -o -name ".env.*.example" \) -not -path "*/node_modules/*" -print0)
 
 echo ""
 
@@ -52,7 +63,9 @@ if [ ${#missing_env[@]} -gt 0 ]; then
 	echo -e "${YELLOW}Missing .env files:${NC}"
 	for file in "${missing_env[@]}"; do
 		dir=$(dirname "$file")
-		echo "  cp $file $dir/.env"
+		basename=$(basename "$file")
+		target="${basename%.example}"
+		echo "  cp $file $dir/$target"
 	done
 	echo ""
 	errors=$((errors + ${#missing_env[@]}))

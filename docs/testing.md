@@ -187,7 +187,7 @@ pnpm --filter @yourcompany/frontend storybook
 
 ### Notes
 
-- The frontend app reads `VITE_API_URL` and `VITE_AUTH_URL` at runtime; ensure `apps/frontend/web/.env` is present (or export those env vars) so Storybook can render auth components.
+- The frontend app reads `VITE_API_URL` and `VITE_AUTH_URL` at runtime; ensure `apps/frontend/web/.env.development` (or `.env`) is present (or export those env vars) so Storybook can render auth components.
 
 ### Performance Tuning
 

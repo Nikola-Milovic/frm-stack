@@ -67,7 +67,9 @@ pnpm install
 
 - root (docker compose): copy `.env.example` → `.env` (only used by `compose.yml`)
 - backend: copy `apps/backend/api/.env.example` → `apps/backend/api/.env`
-- frontend: copy `apps/frontend/web/.env.example` → `apps/frontend/web/.env`
+- frontend: copy `apps/frontend/web/.env.development.example` → `apps/frontend/web/.env.development`
+  - Note: Vite loads `.env` (shared across all modes) and `.env.[mode]` (mode-specific)
+  - See `apps/frontend/web/.env.example` for more details on Vite's env loading order
 
 3) Start Postgres + apply schema:
 

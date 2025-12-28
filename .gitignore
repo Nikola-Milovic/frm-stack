@@ -11,3 +11,6 @@ tsconfig.tsbuildinfo
 storybook-static
 .astro
 .vscode
+.env.*
+!.env.example
+!.env.*.example

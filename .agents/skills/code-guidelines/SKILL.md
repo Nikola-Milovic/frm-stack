@@ -5,17 +5,11 @@ description: Apply this repository's coding conventions and patterns. Use when w
 
 # Code Guidelines
 
-Follow the patterns established in this repository. Reference `code-guidelines.md` at project root for the authoritative source.
+This repo is a **demo**. Patterns here are suggestions; swap for what fits your team.
 
-## Core Patterns
-
-### Dependency Injection
+## Dependency Injection
 
 Prefer constructor/function injection for side effects:
-- DB connections, loggers, auth, clock, external clients
-- Wire at edges (app startup, router factories)
-- Avoid global singleton imports from deep modules
-- Tests supply fakes/in-memory implementations without patching
 
 ```typescript
 // Good: injectable
@@ -27,64 +21,155 @@ function createUserService(db: Database, logger: Logger) {
 import { db } from '../db'
 ```
 
-### Error Handling
+- Wire at edges (app startup, router factories)
+- Avoid global singleton imports from deep modules
+- Tests supply fakes without patching globals
 
-Use `neverthrow` Result types for expected failures. See `docs/neverthrow.md`.
+## Error Handling (neverthrow)
+
+Use `Result<T, E>` for explicit success/error flow.
 
 ```typescript
-// Good: explicit Result
+// Services return Result
 function findUser(id: string): ResultAsync<User, NotFoundError | DbError>
 
-// Bad: throwing for control flow
-function findUser(id: string): Promise<User> // throws on not found
+// Validate input early
+const validated = validateInput(schema, input);
+if (validated.isErr()) return err(validated.error);
+
+// Wrap throwy code once
+return await fromAsyncThrowable(
+  async () => dbCall(),
+  (e) => typedError(e),
+)();
 ```
 
-Error conventions:
-- Model expected failures as custom errors (`NotFoundError`, `UnauthorizedError`)
-- Normalize unknown catches with `typedError()`
-- Map internal errors to transport errors intentionally
-- Never leak internals to clients
+**Error mapping:**
+- auth/ownership → 401/403
+- missing resources → 404
+- validation → 400
+- unexpected → 500 (log with context)
 
-### Logging
+**Helpers:** `packages/backend/core/src/validation.ts` (`validateInput`, `typedError`)
 
-Use structured logging with pino. See `docs/logging.md`.
+## Logging (pino)
+
+Use structured logging:
 
 ```typescript
 logger.info("user created", { userId: user.id, email: user.email })
+logger.error("operation failed", err, { orderId, userId })
 ```
 
-Logging rules:
+**Rules:**
 - Log at boundaries (request → router → service)
 - Never log secrets (tokens, passwords, cookies)
-- Use appropriate levels: error, warn, info, debug
+- Use levels: error, warn, info, debug
+- Optional `REQUEST_LOGGING` flag in `apps/backend/api/src/orpc.ts`
 
-### Testing
+**Location:** `apps/backend/api/src/log.ts`, `packages/backend/core/src/log.ts`
 
-See `docs/testing.md` and `docs/vitest_config.md`.
+## oRPC (Type-safe RPC)
 
-- Use DI to inject test dependencies
-- Prefer real DB for integration tests (testcontainers)
-- Use fakes when faster/clearer
-- Make tests deterministic (no timing, randomness, shared state)
+Type-safe RPC between frontend and backend with React Query helpers.
 
-### API Design
+### Server Pattern
 
-Use oRPC for type-safe APIs. See `docs/orpc.md`.
+```typescript
+// Router factory pattern
+orpc.router({
+  user: userRouter(),
+  todo: todoRouter(),
+});
 
-- Define contracts in routers
-- Validate inputs with schemas
-- Return typed Results
+// Protected procedure with authOnly middleware
+orpc.use(authOnly).input(zodSchema).handler(...)
+```
 
-## Documentation
+### Client Usage
 
-See `docs/` for detailed guides:
-- `auth.md` - Authentication patterns
-- `config.md` - Configuration management
-- `db.md` - Database conventions
-- `orpc.md` - API design with oRPC
-- `neverthrow.md` - Error handling with Result types
-- `testing.md` - Testing strategies
-- `tech_choices.md` - Technology decisions
+```typescript
+const api = useApi();
+
+// Queries
+const todosQuery = useQuery(api.todo.list.queryOptions({ input: { completed: false } }));
+
+// Mutations
+const createTodo = useMutation(api.todo.create.mutationOptions({
+  onSuccess: () => queryClient.invalidateQueries({ queryKey: api.todo.key() })
+}));
+```
+
+**Key files:**
+- Server router: `apps/backend/api/src/routers/index.ts`
+- Server setup: `apps/backend/api/src/orpc.ts`
+- Client: `apps/frontend/web/app/providers/orpc-provider.tsx`
+
+## Auth (Better Auth)
+
+Cookie-based auth with typed user/session in oRPC context.
+
+```typescript
+// Read user in oRPC handlers
+const userId = context.user.id;
+
+// Use authOnly middleware for protected procedures
+orpc.use(authOnly).handler(...)
+```
+
+**CORS requirements:**
+- Backend: `hono/cors` with `credentials: true`
+- Frontend: fetch with `credentials: "include"`
+
+**Key files:**
+- Backend: `apps/backend/api/src/auth.ts`
+- Core: `packages/backend/core/src/auth.ts`
+- Frontend: `apps/frontend/web/app/providers/*`
+
+## Config (env + Zod)
+
+Validate env vars at startup with Zod:
+
+```typescript
+// Backend: parse process.env at module load
+const appConfig = configSchema.parse(process.env);
+
+// Frontend: read import.meta.env
+const config = getConfig();
+```
+
+**Vite env file priority:**
+1. `.env.[mode].local` (git-ignored)
+2. `.env.[mode]`
+3. `.env.local` (git-ignored)
+4. `.env`
+
+Only `VITE_*` variables exposed to client. Keep `.env.*.example` in sync.
+
+## CI/CD
+
+**Local (Husky):** On `git push`:
+- `pnpm lint:check`
+- `pnpm format:check`
+- `pnpm typecheck`
+
+Bypass: `HUSKY=0 git push`
+
+**GitHub Actions:** On PR:
+- All above + `pnpm test`
+
+Workflow: `.github/workflows/ci.yml`
+
+## Tech Choices Summary
+
+| Layer | Choice | Why |
+|-------|--------|-----|
+| DB | Kysely | Typed query builder, SQL-first, easy DI |
+| RPC | oRPC | End-to-end typed, React Query helpers |
+| Router | TanStack Router | Type-safe, file-based |
+| Errors | neverthrow | Explicit success/failure flows |
+| Auth | Better Auth | Free, good coverage, easy swap |
+| Testing | testcontainers | Real Postgres, shared container for speed |
 
 ## When Writing Code
 
@@ -93,13 +178,4 @@ See `docs/` for detailed guides:
 3. Handle errors explicitly with Result types
 4. Add structured logging at boundaries
 5. Write tests that use DI
-6. Update docs if changing workflows
-
-## LLM Usage
-
-When using AI assistance:
-- Treat output as untrusted input
-- Run `pnpm typecheck` and `pnpm test`
-- Verify security implications
-- Watch for: validation gaps, error handling, logging secrets, SQL issues
-
+6. Run `pnpm typecheck` and `pnpm test`

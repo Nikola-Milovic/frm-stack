@@ -50,7 +50,7 @@ Important: there are **no builds** for the main apps during dev (both frontend a
 
 ### Prerequisites
 
-- Node.js (targets Node 24+)
+- Node.js (targets Node 24+) (supports nvm via .nvmrc [guide here](https://github.com/nvm-sh/nvm?tab=readme-ov-file#nvmrc))
 - pnpm (see the pinned version in root `package.json`)
 - Docker (for Postgres)
 - Atlas + Just (recommended, because `just setup` uses them)

@@ -147,4 +147,4 @@ See `CONTRIBUTING.md` and `code-guidelines.md` (LLMs are fine, but you’re resp
 
 ## License
 
-MIT (see `LICENCE.md`).
+MIT (see `LICENSE.md`).

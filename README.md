@@ -93,6 +93,37 @@ devbox shell
 
 Then run the same steps (`pnpm install`, `just setup`, `pnpm dev`).
 
+## Worktree Workflow (Parallel Development)
+
+This repo supports [Worktrunk](https://worktrunk.dev/) for parallel feature development using git worktrees. Each worktree gets its own working copy, dependencies, and environment.
+
+**Quick Start:**
+
+```bash
+# Install worktrunk (macOS)
+brew install worktrunk/tap/worktrunk
+
+# Setup shell integration (required)
+wt config shell install
+
+# Configure worktree path (required for non-bare repos)
+wt config create
+# Add to ~/.config/worktrunk/config.toml:
+#   worktree-path = "../{{ branch | sanitize }}"
+
+# Create a new worktree
+wt switch -c feature/my-feature
+# Auto-runs: copies .env + node_modules, runs pnpm install
+
+# Work on your feature
+just setup && pnpm dev
+
+# Merge and cleanup when done
+wt merge  # Squashes, merges, removes worktree
+```
+
+See `docs/worktree.md` for full documentation.
+
 ## Useful commands
 
 - `pnpm dev` / `pnpm typecheck` / `pnpm lint:check` / `pnpm format:check` / `pnpm test`
@@ -131,6 +162,7 @@ Then run the same steps (`pnpm install`, `just setup`, `pnpm dev`).
 - `docs/config.md`
 - `docs/logging.md`
 - `docs/mobile.md`
+- `docs/worktree.md`
 - `docs/skills.md`
 
 ## Skills (AI Workflows)

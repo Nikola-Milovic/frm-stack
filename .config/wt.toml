@@ -1,0 +1,36 @@
+# Worktrunk Project Configuration
+# This file defines lifecycle hooks for worktree operations.
+# Checked into git and shared across all developers.
+
+# Template variables available in all hooks:
+#   {{ repo }}      - Repository name (e.g., "nutri")
+#   {{ branch }}    - Raw branch name (e.g., "feature/foo")
+#   {{ worktree }}  - Absolute path to the worktree
+#   {{ repo_root }} - Absolute path to the repository root
+#
+# Filters:
+#   {{ branch | sanitize }}  - Replace / and \ with - (e.g., "feature-foo")
+
+# Post-Create Hook
+# Runs SEQUENTIALLY and BLOCKS until complete
+# Copies gitignored files and installs dependencies
+[post-create]
+setup = "bash scripts/worktree/setup.sh '{{ branch }}' '{{ primary_worktree_path }}'"
+direnv = "cd {{ worktree_path }} && direnv allow || true"
+
+# Pre-Remove Hook
+# Cleanup generated files in the worktree
+[pre-remove]
+cleanup = "bash scripts/worktree/cleanup.sh '{{ branch }}'"
+# Clean up devbox/direnv files before deleting worktree
+# devbox = "rm -f {{ worktree_path }}/.envrc {{ worktree_path }}/devbox.json {{ worktree_path }}/devbox.lock 2>/dev/null || true"
+
+# Pre-Merge Hook
+# Run validation before merging
+[pre-merge]
+typecheck = "pnpm typecheck"
+lint = "pnpm lint:check"
+format = "pnpm format:check"
+env-check = "bash scripts/worktree/check-env-changes.sh"
+# test = "pnpm test"
+

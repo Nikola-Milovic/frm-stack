@@ -1,7 +1,7 @@
 # Exclude unnecessary directories
 deployment
 docs
-tools
+scripts
 
 # Exclude development files
 .git

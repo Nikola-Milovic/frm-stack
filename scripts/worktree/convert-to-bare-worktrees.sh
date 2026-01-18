@@ -252,6 +252,24 @@ main() {
     run git worktree add "$dest" "$branch"
   done
 
+  # Run setup script for each worktree to copy gitignored files and install dependencies
+  log_info "Running setup for each worktree..."
+
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+    log_info "Would run setup.sh for each worktree (copies .env, node_modules, etc. and runs pnpm install)"
+  else
+    for branch in "${branches[@]}"; do
+      local dest="${dir_for_branch[$branch]}"
+      log_info "  → Setting up: $dest"
+
+      # Run setup.sh from the new worktree, passing the current repo root as the source
+      (cd "$dest" && bash scripts/worktree/setup.sh "$branch" "$repo_root") || {
+        log_warn "Setup script failed for $dest, continuing..."
+      }
+    done
+    log_success "All worktrees set up"
+  fi
+
   # Convert the common .git directory into a bare repo config.
   log_info "Marking repo as bare (core.bare=true) and setting HEAD -> $PRIMARY_BRANCH"
   run git --git-dir=.git config core.bare true

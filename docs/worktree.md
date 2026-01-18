@@ -274,7 +274,7 @@ This ensures each worktree has the same Nix-based development environment as the
 
 ## Scripts
 
-The worktree workflow is powered by three bash scripts in `scripts/worktree/`:
+The worktree workflow is powered by bash scripts in `scripts/worktree/`:
 
 ### `setup.sh`
 
@@ -302,6 +302,18 @@ The worktree workflow is powered by three bash scripts in `scripts/worktree/`:
   3. Suggests commands to see what changed
 - **Location**: `scripts/worktree/check-env-changes.sh`
 
+### `convert-to-bare-worktrees.sh`
+
+- **When**: Run manually to convert a regular repo to bare + worktrees layout
+- **What it does**:
+  1. Creates a backup tarball of the current repository
+  2. Creates worktrees for all local branches
+  3. Runs `setup.sh` for each worktree to copy gitignored files and install dependencies
+  4. Converts the repository to a bare repo configuration
+  5. Moves old working tree files aside
+- **Usage**: `bash scripts/worktree/convert-to-bare-worktrees.sh [--primary main] [--dry-run]`
+- **Location**: `scripts/worktree/convert-to-bare-worktrees.sh`
+
 ## Benefits
 
 Using Worktrunk with this repository provides:
@@ -315,7 +327,45 @@ Using Worktrunk with this repository provides:
 
 ## Alternative: Bare Repository Workflow
 
-For advanced users, Worktrunk also supports bare repositories where all worktrees are siblings:
+For advanced users, Worktrunk also supports bare repositories where all worktrees are siblings. This repository includes a conversion script to migrate from a regular repo to bare + worktrees.
+
+### Converting Existing Repository to Bare + Worktrees
+
+```bash
+# From your regular repo root (where .git is a directory)
+bash scripts/worktree/convert-to-bare-worktrees.sh
+
+# The script will:
+# 1. Create a backup tarball (in parent directory)
+# 2. Create worktrees for all local branches
+# 3. Run setup.sh for each worktree (copies .env, node_modules, runs pnpm install)
+# 4. Convert .git to bare repository
+# 5. Move old working tree files to _old_root_worktree_<timestamp>/
+```
+
+**Options:**
+
+```bash
+--primary <branch>      # Branch to treat as primary (default: current branch or main)
+--worktrees-root <dir>  # Where to create worktrees (default: ".")
+--no-backup             # Skip creating backup tarball
+--fetch                 # Run git fetch after conversion
+--dry-run               # Preview what would happen
+```
+
+**Result structure:**
+
+```
+template/                                # bare repository container
+  .git/                                  # bare repo data
+  main/                                  # main worktree (with .env, node_modules, etc.)
+  feature-auth/                          # feature worktree (with .env, node_modules, etc.)
+  _old_root_worktree_20260118_120332/   # moved aside original files (can delete after verifying)
+```
+
+### Cloning as Bare Repository
+
+Alternatively, clone fresh as a bare repository:
 
 ```bash
 # Clone as bare repo

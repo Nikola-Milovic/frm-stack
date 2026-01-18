@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Usage @POSTGRES_CONTAINER_NAME=$(docker inspect -f '{{{{.Name}}' $(docker-compose ps -q postgres) | cut -c2-) ./tools/db_isready.sh
+# Usage @POSTGRES_CONTAINER_NAME=$(docker inspect -f '{{{{.Name}}' $(docker-compose ps -q postgres) | cut -c2-) ./scripts/db_isready.sh
 # https://stackoverflow.com/a/55990412/13440079
 # Or just give the container a name
 

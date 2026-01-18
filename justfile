@@ -52,9 +52,9 @@ db-schema:
 
 setup: dev-clean
 	@pnpm install
-	@./tools/dev_check.sh
+	@./scripts/dev_check.sh
 	@{{dc}} up -d
-	@POSTGRES_CONTAINER_NAME=$(docker inspect -f '{{{{.Name}}' $(docker-compose ps -q postgres) | cut -c2-) ./tools/db_isready.sh
+	@POSTGRES_CONTAINER_NAME=$(docker inspect -f '{{{{.Name}}' $(docker-compose ps -q postgres) | cut -c2-) ./scripts/db_isready.sh
 	@just db-migrate
 
 start:

@@ -1,0 +1,76 @@
+# =============================================================================
+# Capability Sources
+# =============================================================================
+# Fetch capabilities from Git repositories. On sync, these are
+# cloned/updated and made available to your profiles.
+#
+# [capabilities.sources]
+# # GitHub shorthand (uses latest commit)
+# tasks = "github:example-org/tasks-capability"
+#
+# # With subdirectory path
+# ralph = { source = "github:example-org/ralph", path = "plugins/my-cap" }
+#
+# # Other Git sources
+# private = "git@github.com:company/private-cap.git"
+# gitlab = "https://gitlab.com/user/capability.git"
+
+# =============================================================================
+# Capability Groups
+# =============================================================================
+# Bundle multiple capabilities under a single name for cleaner profiles.
+# Reference groups in profiles with the "group:" prefix.
+#
+# [capabilities.groups]
+# expo = ["expo-app-design", "expo-deployment", "upgrading-expo"]
+# backend = ["cloudflare", "database-tools"]
+#
+# [profiles.mobile]
+# capabilities = ["group:expo", "react-native-tools"]
+
+# =============================================================================
+# Always Enabled Capabilities
+# =============================================================================
+# Capabilities that load in ALL profiles, regardless of profile config.
+# Useful for essential tools needed everywhere.
+#
+# [capabilities]
+# always_enabled = ["git-tools", "linting"]
+
+# =============================================================================
+# MCP Servers
+# =============================================================================
+# Define MCP servers that automatically become capabilities.
+# Reference in profiles using the MCP name directly, e.g. capabilities = ["filesystem"]
+#
+# [mcps.filesystem]
+# command = "npx"
+# args = ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/dir"]
+# transport = "stdio"  # stdio (default), sse, or http
+#
+# [mcps.database]
+# command = "node"
+# args = ["./servers/database.js"]
+# cwd = "./mcp-servers"
+# env = { DB_URL = "${DATABASE_URL}" }
+
+# =============================================================================
+# Profiles
+# =============================================================================
+# Define different capability sets for different workflows.
+# Switch profiles with: omnidev profile use <name>
+
+[profiles.default]
+capabilities = ["frontend", "backend", "general"]
+
+[profiles.planning]
+capabilities = []
+
+[profiles.coding]
+capabilities = []
+
+
+[capabilities.sources]
+general = "file://./capabilities/general"
+backend = "file://./capabilities/backend"
+frontend = "file://./capabilities/frontend"

@@ -1,0 +1,5 @@
+[capability]
+id = "backend"
+name = "Backend"
+version = "0.1.0"
+description = "Backend skills"

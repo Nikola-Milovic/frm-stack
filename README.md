@@ -173,6 +173,12 @@ This repo includes [Skills](docs/skills.md) — modular instruction sets that he
 
 Skills live in `.agents/skills/` and work tracking lives in `.work/`. See `docs/skills.md` for details.
 
+## OmniDev
+
+We built OmniDev to stop reinventing AI tooling setups across providers and repos. It lets you package and share capabilities (skills, rules, hooks, commands) once, then load the right set for the task at hand.
+
+Docs: `https://github.com/frmlabz/omnidev`
+
 ## Contributing
 
 See `CONTRIBUTING.md` and `code-guidelines.md` (LLMs are fine, but you’re responsible for correctness/security/licensing).

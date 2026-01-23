@@ -4,7 +4,10 @@ Use this template for each new entry in `CHANGELOG.md`.
 
 ## Required fields
 - Date: `YYYY-MM-DD` (local date)
-- Commit: short hash (update after commit if needed)
+- Change Ref: short hash of the commit that introduced the change
+  - If the changelog entry is in a follow-up commit, reference the previous commit hash
+  - If using a single commit, use the commit subject as the change ref
+  - If no hash yet, use `TBD` and amend before push
 - Summary: 1–3 bullets of what changed
 - Why: reason and intent
 - LLM Notes: where to look and how to apply downstream
@@ -12,7 +15,7 @@ Use this template for each new entry in `CHANGELOG.md`.
 
 ## Template
 ```
-### YYYY-MM-DD — <short-hash>
+### YYYY-MM-DD — <change-ref>
 - Summary:
   - ...
 - Why:

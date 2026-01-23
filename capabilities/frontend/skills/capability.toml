@@ -1,0 +1,5 @@
+[capability]
+id = "general"
+name = "General"
+version = "0.1.0"
+description = "General skills"

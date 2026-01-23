@@ -9,7 +9,10 @@ description: Create and update CHANGELOG.md entries for this template repo with 
 
 1. Determine whether the change modifies the template (code, config, docs, deps). If yes, add a changelog entry.
 2. Add a new entry at the top of `## Entries` in `CHANGELOG.md` using the template in `references/changelog-format.md`.
-3. Fill the date (`YYYY-MM-DD`) and short commit hash. If the hash is not known yet, use `TBD` and amend the commit before push.
+3. Fill the date (`YYYY-MM-DD`) and change ref:
+   - Preferred: commit the change first, then add the changelog entry referencing the previous commit hash.
+   - If using a single commit, use the commit subject as the change ref.
+   - Alternative: use `TBD` and amend the commit before push.
 4. Summarize what changed (1–3 bullets), why it changed, and add LLM notes with paths/commits to guide downstream updates.
 5. Keep entries in reverse chronological order and avoid editing older entries except for corrections.
 

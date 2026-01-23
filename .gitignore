@@ -14,3 +14,10 @@ storybook-static
 .env.*
 !.env.example
 !.env.*.example
+# OmniDev
+.omni/
+omni.local.toml
+# OmniDev Provider Files
+CLAUDE.md
+.claude/
+.mcp.json

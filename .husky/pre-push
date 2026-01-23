@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 set -e
 
+./scripts/check-changelog.sh
+
 pnpm lint:check
 pnpm format:check
 pnpm typecheck

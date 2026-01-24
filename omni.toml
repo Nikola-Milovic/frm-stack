@@ -61,7 +61,7 @@
 # Switch profiles with: omnidev profile use <name>
 
 [profiles.default]
-capabilities = ["frontend", "backend", "general"]
+capabilities = ["frontend", "backend", "general", "group:expo"]
 
 [profiles.planning]
 capabilities = []
@@ -74,3 +74,9 @@ capabilities = []
 general = "file://./capabilities/general"
 backend = "file://./capabilities/backend"
 frontend = "file://./capabilities/frontend"
+expo-app-design = { source = "github:expo/skills", path = "plugins/expo-app-design", version = "latest"}
+expo-deployment = { source = "github:expo/skills", path = "plugins/expo-deployment", version = "latest" }
+upgrading-expo = { source = "github:expo/skills", path = "plugins/upgrading-expo", version = "latest" }
+
+[capabilities.groups]
+expo = ["expo-app-design", "expo-deployment", "upgrading-expo"]
